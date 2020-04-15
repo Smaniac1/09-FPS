@@ -1,0 +1,710 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Scenes/Flash_Light.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/High_High_Leaf_Tree.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Low_High_Leaf_Tree.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Low_Low_Leaf_Tree.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Medium_High_Leaf_Tree.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Medium_Low_Leaf_Tree.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Tall_Low_Leaf_Tree.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scripts/Game.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/Ghost.tscn" type="PackedScene" id=10]
+
+[sub_resource type="PlaneMesh" id=1]
+
+[sub_resource type="ConvexPolygonShape" id=2]
+points = PoolVector3Array( -1.00542, 0.00546448, -1.00546, -1.00542, 0.00546448, 1.00546, 1.00546, 0.00546448, -1.00546, 1.00546, 0.00546448, 1.00546 )
+
+[sub_resource type="CapsuleShape" id=3]
+radius = 0.5
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.4, 0.1, 0.4 )
+
+[node name="Game" type="Spatial"]
+script = ExtResource( 9 )
+
+[node name="Game_Timer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 600.0
+one_shot = true
+autostart = true
+
+[node name="Ground" type="StaticBody" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Ground"]
+transform = Transform( 100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Ground"]
+transform = Transform( 100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="Player" type="KinematicBody" parent="."]
+script = ExtResource( 2 )
+
+[node name="Body" type="CollisionShape" parent="Player"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.1, 0 )
+shape = SubResource( 3 )
+
+[node name="Feet" type="CollisionShape" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0 )
+shape = SubResource( 4 )
+
+[node name="Pivot" type="Spatial" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
+
+[node name="Camera" type="Camera" parent="Player/Pivot"]
+current = true
+
+[node name="Flash_Light" parent="Player/Pivot" instance=ExtResource( 1 )]
+transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.3, -0.25, -0.25 )
+
+[node name="HUD" type="Node2D" parent="."]
+position = Vector2( 0, -1.10956 )
+
+[node name="Score" type="Label" parent="HUD"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 50.0
+margin_bottom = 24.0
+text = "Score:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Time_Left" type="Label" parent="HUD"]
+margin_left = 860.0
+margin_top = 10.0
+margin_right = 969.0
+margin_bottom = 24.0
+text = "Time Remaining:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Flash_Light_Time" type="Label" parent="HUD"]
+margin_left = 175.0
+margin_top = 10.0
+margin_right = 321.0
+margin_bottom = 24.0
+text = "Time Left on Flashlight:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health" type="Label" parent="HUD"]
+margin_left = 450.0
+margin_top = 10.0
+margin_right = 496.0
+margin_bottom = 24.0
+text = "Health:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Enemy_Health" type="Label" parent="HUD"]
+margin_left = 650.0
+margin_top = 10.0
+margin_right = 743.0
+margin_bottom = 24.0
+text = "Enemy Health:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Forest" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.237038, 0.196796, 0.12899 )
+
+[node name="High_High_Leaf_Tree" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 15.9, 8.84644 )
+
+[node name="High_High_Leaf_Tree24" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 52.3977, 15.9, 75.0446 )
+
+[node name="High_High_Leaf_Tree25" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 84.1273, 15.9, 63.2291 )
+
+[node name="High_High_Leaf_Tree26" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.29905, 15.9, 82.41 )
+
+[node name="High_High_Leaf_Tree27" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.9307, 15.9, 54.4025 )
+
+[node name="High_High_Leaf_Tree28" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.1398, 15.9, 46.1395 )
+
+[node name="High_High_Leaf_Tree29" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60.1598, 15.9, 85.5159 )
+
+[node name="High_High_Leaf_Tree30" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60.1598, 15.9, 85.5159 )
+
+[node name="High_High_Leaf_Tree10" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.2375, 15.9, -21.0176 )
+
+[node name="High_High_Leaf_Tree11" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.2693, 15.9, -10.0809 )
+
+[node name="High_High_Leaf_Tree12" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.7404, 15.9, -39.0885 )
+
+[node name="High_High_Leaf_Tree9" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -45.2925, 15.9, 35.183 )
+
+[node name="High_High_Leaf_Tree14" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.17986, 15.9, 63.9229 )
+
+[node name="High_High_Leaf_Tree16" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -73.5436, 15.9, -58.7578 )
+
+[node name="High_High_Leaf_Tree17" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 57.8986, 15.9, -58.7578 )
+
+[node name="High_High_Leaf_Tree18" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -54.8788, 15.9, -83.5074 )
+
+[node name="High_High_Leaf_Tree19" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -88.7274, 15.9, -83.5074 )
+
+[node name="High_High_Leaf_Tree20" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.816, 15.9, -83.5074 )
+
+[node name="High_High_Leaf_Tree22" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.1383, 15.9, -65.4561 )
+
+[node name="High_High_Leaf_Tree21" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.49662, 15.9, -74.1276 )
+
+[node name="High_High_Leaf_Tree15" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 74.858, 15.9, 10.064 )
+
+[node name="High_High_Leaf_Tree23" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 62.0745, 15.9, -75.8368 )
+
+[node name="High_High_Leaf_Tree8" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0515, 15.9, 34.817 )
+
+[node name="High_High_Leaf_Tree34" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -71.3654, 15.9, 34.817 )
+
+[node name="High_High_Leaf_Tree35" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -67.6188, 15.9, 67.0629 )
+
+[node name="High_High_Leaf_Tree36" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -52.8326, 15.9, 88.4448 )
+
+[node name="High_High_Leaf_Tree6" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.0613, 15.9, 8.33548 )
+
+[node name="High_High_Leaf_Tree7" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 0.999998, 0, 0.00179769, 0, 1, 0, -0.00179769, 0, 0.999998, 24.0597, 15.9, -0.914005 )
+
+[node name="High_High_Leaf_Tree5" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.929, 15.9, 20.8581 )
+
+[node name="High_High_Leaf_Tree2" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 15.9, -40 )
+
+[node name="High_High_Leaf_Tree13" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -33.6744, 15.9, -42.8655 )
+
+[node name="High_High_Leaf_Tree3" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9699, 15.9448, 39.905 )
+
+[node name="High_High_Leaf_Tree32" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.9699, 15.9448, 39.905 )
+
+[node name="High_High_Leaf_Tree33" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -76.5736, 15.9448, 65.0258 )
+
+[node name="High_High_Leaf_Tree31" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -86.7261, 15.9, 83.6641 )
+
+[node name="High_High_Leaf_Tree4" parent="Forest" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.402, 15.9, -25.862 )
+
+[node name="Low_High_Leaf_Tree" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 2.1, -45 )
+
+[node name="Low_High_Leaf_Tree8" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 2.1, -7.15977 )
+
+[node name="Low_High_Leaf_Tree10" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.7127, 2.1, 11.4498 )
+
+[node name="Low_High_Leaf_Tree11" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44.01, 2.1, 21.718 )
+
+[node name="Low_High_Leaf_Tree12" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 44.01, 2.1, -3.00318 )
+
+[node name="Low_High_Leaf_Tree5" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.9927, 2.1, -12.0565 )
+
+[node name="Low_High_Leaf_Tree9" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -37.5498, 2.1, -12.0565 )
+
+[node name="Low_High_Leaf_Tree2" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1037, 2.09998, 10.1423 )
+
+[node name="Low_High_Leaf_Tree6" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 2.1, -28.7928 )
+
+[node name="Low_High_Leaf_Tree24" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53.716, 2.1, 13.9403 )
+
+[node name="Low_High_Leaf_Tree25" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 69.2049, 2.1, 41.175 )
+
+[node name="Low_High_Leaf_Tree26" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60.0651, 2.1, -32.7194 )
+
+[node name="Low_High_Leaf_Tree27" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 94.7156, 2.1, -53.7953 )
+
+[node name="Low_High_Leaf_Tree28" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 94.8225, 2.1, -91.2374 )
+
+[node name="Low_High_Leaf_Tree29" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 83.3665, 2.1, -78.0209 )
+
+[node name="Low_High_Leaf_Tree30" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 83.3665, 2.1, -24.3156 )
+
+[node name="Low_High_Leaf_Tree31" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 95.9916, 2.1, -11.7672 )
+
+[node name="Low_High_Leaf_Tree32" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 95.9916, 2.1, 26.4004 )
+
+[node name="Low_High_Leaf_Tree7" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 41.6241, 2.1, -41.7281 )
+
+[node name="Low_High_Leaf_Tree3" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, -38 )
+
+[node name="Low_High_Leaf_Tree13" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5795, 2.1, -91.7602 )
+
+[node name="Low_High_Leaf_Tree22" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 31.5795, 2.1, -56.004 )
+
+[node name="Low_High_Leaf_Tree23" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.3273, 2.1, -79.5562 )
+
+[node name="Low_High_Leaf_Tree14" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 80.5106, 2.1, 79.19 )
+
+[node name="Low_High_Leaf_Tree15" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -70.7605, 2.1, 10.4472 )
+
+[node name="Low_High_Leaf_Tree16" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -41.2386, 2.1, -68.945 )
+
+[node name="Low_High_Leaf_Tree17" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.7501, 2.1, -83.1623 )
+
+[node name="Low_High_Leaf_Tree18" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -82.039, 2.1, -75.3535 )
+
+[node name="Low_High_Leaf_Tree19" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -91.8889, 2.1, -57.9346 )
+
+[node name="Low_High_Leaf_Tree20" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -46.8889, 2.1, -57.9346 )
+
+[node name="Low_High_Leaf_Tree21" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -46.8889, 2.1, 16.8966 )
+
+[node name="Low_High_Leaf_Tree33" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -74.2392, 2.1, 46.4719 )
+
+[node name="Low_High_Leaf_Tree34" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -92.2623, 2.1, 72.0861 )
+
+[node name="Low_High_Leaf_Tree35" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -34.3988, 2.1, 49.1019 )
+
+[node name="Low_High_Leaf_Tree36" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.833113, 2.1, 92.59 )
+
+[node name="Low_High_Leaf_Tree37" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -44.4203, 2.1, 77.4487 )
+
+[node name="Low_High_Leaf_Tree38" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.4218, 2.1, 63.3979 )
+
+[node name="Low_High_Leaf_Tree39" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -75.6702, 2.1, 82.3245 )
+
+[node name="Low_High_Leaf_Tree40" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -75.6702, 2.1, 24.3027 )
+
+[node name="Low_High_Leaf_Tree41" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 0.998273, 0, -0.0587488, 0, 1, 0, 0.0587488, 0, 0.998273, -60.3726, 2.1, 48.552 )
+
+[node name="Low_High_Leaf_Tree42" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 0.998273, 0, -0.0587488, 0, 1, 0, 0.0587488, 0, 0.998273, -25.1091, 2.1, 75.4602 )
+
+[node name="Low_High_Leaf_Tree4" parent="Forest" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.0314, 2.13127, 1.45558 )
+
+[node name="Low_Low_Leaf_Tree" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.0489, 2.1, -39.5186 )
+
+[node name="Low_Low_Leaf_Tree5" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25.2218, 2.1, -31.9998 )
+
+[node name="Low_Low_Leaf_Tree2" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 2.1, 45 )
+
+[node name="Low_Low_Leaf_Tree6" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16525, 2.1854, 25.9896 )
+
+[node name="Low_Low_Leaf_Tree3" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -38.1427, 2.07401, 15.5026 )
+
+[node name="Low_Low_Leaf_Tree7" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.4402, 2.07401, -85.4217 )
+
+[node name="Low_Low_Leaf_Tree8" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.1637, 2.07401, -64.0193 )
+
+[node name="Low_Low_Leaf_Tree13" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45.6659, 2.07401, -93.4016 )
+
+[node name="Low_Low_Leaf_Tree14" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.94121, 2.07401, -93.4016 )
+
+[node name="Low_Low_Leaf_Tree9" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -97.5351, 2.07401, -39.9851 )
+
+[node name="Low_Low_Leaf_Tree10" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -85.3487, 2.07401, 32.4693 )
+
+[node name="Low_Low_Leaf_Tree11" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -55.2788, 2.07401, 66.9125 )
+
+[node name="Low_Low_Leaf_Tree12" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.9058, 2.07401, 66.9125 )
+
+[node name="Low_Low_Leaf_Tree4" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 2.1, -15 )
+
+[node name="Low_Low_Leaf_Tree15" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.2582, 2.1, 68.9023 )
+
+[node name="Low_Low_Leaf_Tree16" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65.6221, 2.1, 28.9779 )
+
+[node name="Low_Low_Leaf_Tree17" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 65.6221, 2.1, 59.1804 )
+
+[node name="Low_Low_Leaf_Tree18" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 82.8278, 2.1, 48.9932 )
+
+[node name="Low_Low_Leaf_Tree19" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 82.8278, 2.1, 87.9348 )
+
+[node name="Low_Low_Leaf_Tree20" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 47.9911, 2.1, 87.9348 )
+
+[node name="Low_Low_Leaf_Tree21" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 52.6644, 2.1, 44.9858 )
+
+[node name="Low_Low_Leaf_Tree22" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 66.0133, 2.1, 70.6699 )
+
+[node name="Low_Low_Leaf_Tree23" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 89.8891, 2.1, 5.33719 )
+
+[node name="Low_Low_Leaf_Tree24" parent="Forest" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 89.8891, 2.1, 5.33719 )
+
+[node name="Medium_High_Leaf_Tree" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 8.3, -12 )
+
+[node name="Medium_High_Leaf_Tree5" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -30.6809, 8.3, -21.4321 )
+
+[node name="Medium_High_Leaf_Tree12" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -30.6809, 8.3, -88.8637 )
+
+[node name="Medium_High_Leaf_Tree20" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.03186, 8.3, -67.1883 )
+
+[node name="Medium_High_Leaf_Tree21" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 57.8089, 8.3, -88.85 )
+
+[node name="Medium_High_Leaf_Tree22" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.1287, 8.3, -81.8464 )
+
+[node name="Medium_High_Leaf_Tree23" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.6012, 8.3, -78.6339 )
+
+[node name="Medium_High_Leaf_Tree24" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53.7523, 8.3, -45.2479 )
+
+[node name="Medium_High_Leaf_Tree25" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.3687, 8.3, -64.2726 )
+
+[node name="Medium_High_Leaf_Tree26" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 73.9825, 8.3, -64.2726 )
+
+[node name="Medium_High_Leaf_Tree27" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 86.473, 8.3, 20.3609 )
+
+[node name="Medium_High_Leaf_Tree28" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 69.1388, 8.3, -42.543 )
+
+[node name="Medium_High_Leaf_Tree29" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 69.1388, 8.3, -8.88299 )
+
+[node name="Medium_High_Leaf_Tree13" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -84.8888, 8.3, -40.023 )
+
+[node name="Medium_High_Leaf_Tree14" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -87.5997, 8.3, -12.6687 )
+
+[node name="Medium_High_Leaf_Tree15" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -87.5997, 8.3, 13.246 )
+
+[node name="Medium_High_Leaf_Tree16" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -56.0469, 8.3, 13.246 )
+
+[node name="Medium_High_Leaf_Tree17" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -56.0469, 8.3, -28.2887 )
+
+[node name="Medium_High_Leaf_Tree18" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -56.0469, 8.3, -58.2273 )
+
+[node name="Medium_High_Leaf_Tree2" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.58413, 8.3, 6.7031 )
+
+[node name="Medium_High_Leaf_Tree6" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.1172, 8.3, 43.5812 )
+
+[node name="Medium_High_Leaf_Tree7" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.4476, 8.3, 35.7313 )
+
+[node name="Medium_High_Leaf_Tree30" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.06979, 8.3, 54.1552 )
+
+[node name="Medium_High_Leaf_Tree31" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 92.7541, 8.3, 47.528 )
+
+[node name="Medium_High_Leaf_Tree32" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.3677, 8.3, 86.7649 )
+
+[node name="Medium_High_Leaf_Tree9" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.13934, 8.3, 43.0664 )
+
+[node name="Medium_High_Leaf_Tree10" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.6022, 8.3, 25.258 )
+
+[node name="Medium_High_Leaf_Tree11" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.9308, 8.3, 28.3157 )
+
+[node name="Medium_High_Leaf_Tree3" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 8.3, 5 )
+
+[node name="Medium_High_Leaf_Tree8" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 38.0552, 8.3, 28.6648 )
+
+[node name="Medium_High_Leaf_Tree4" parent="Forest" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 8.3, -29 )
+
+[node name="Medium_Low_Leaf_Tree" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.55, 11.2, 17.518 )
+
+[node name="Medium_Low_Leaf_Tree5" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.84891, 11.2, 5.42878 )
+
+[node name="Medium_Low_Leaf_Tree2" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 11.2, -20 )
+
+[node name="Medium_Low_Leaf_Tree6" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -44.1929, 11.2, -20 )
+
+[node name="Medium_Low_Leaf_Tree3" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 11.2, 41 )
+
+[node name="Medium_Low_Leaf_Tree7" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -68.8132, 11.2, -35.8403 )
+
+[node name="Medium_Low_Leaf_Tree8" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -58.8209, 11.2, -1.12679 )
+
+[node name="Medium_Low_Leaf_Tree9" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -63.8991, 11.2, -69.2861 )
+
+[node name="Medium_Low_Leaf_Tree10" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.11161, 11.2, -49.251 )
+
+[node name="Medium_Low_Leaf_Tree12" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 56.8138, 11.2, -13.6721 )
+
+[node name="Medium_Low_Leaf_Tree13" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 84.4771, 11.2, -13.6721 )
+
+[node name="Medium_Low_Leaf_Tree14" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 63.5876, 11.2, 6.94462 )
+
+[node name="Medium_Low_Leaf_Tree15" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 68.6746, 11.2, 21.4351 )
+
+[node name="Medium_Low_Leaf_Tree16" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 68.6746, 11.2, 21.4351 )
+
+[node name="Medium_Low_Leaf_Tree11" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -68.6713, 11.2, -85.3658 )
+
+[node name="Medium_Low_Leaf_Tree4" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 11.2, 30 )
+
+[node name="Medium_Low_Leaf_Tree17" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -95.6531, 11.2, 30 )
+
+[node name="Medium_Low_Leaf_Tree18" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -95.6531, 11.2, -3.09978 )
+
+[node name="Medium_Low_Leaf_Tree19" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -70.78, 11.2, 57.9711 )
+
+[node name="Medium_Low_Leaf_Tree20" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31.0408, 11.2, 57.9711 )
+
+[node name="Medium_Low_Leaf_Tree21" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -31.0408, 11.2, 80.1288 )
+
+[node name="Medium_Low_Leaf_Tree22" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -60.8288, 11.2, 80.1288 )
+
+[node name="Medium_Low_Leaf_Tree23" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -49.4396, 11.2, 47.2346 )
+
+[node name="Medium_Low_Leaf_Tree24" parent="Forest" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -49.4396, 11.2, 47.2346 )
+
+[node name="Tall_Low_Leaf_Tree" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 18.9, 20 )
+
+[node name="Tall_Low_Leaf_Tree5" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 18.9, -7.7476 )
+
+[node name="Tall_Low_Leaf_Tree6" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -28.3708, 18.9, 30.9908 )
+
+[node name="Tall_Low_Leaf_Tree2" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -29.7158, 18.9, -5.31041 )
+
+[node name="Tall_Low_Leaf_Tree7" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.019, 18.9, -64.0014 )
+
+[node name="Tall_Low_Leaf_Tree8" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 48.2051, 18.9, 55.5384 )
+
+[node name="Tall_Low_Leaf_Tree9" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 71.3561, 18.9, -19.4596 )
+
+[node name="Tall_Low_Leaf_Tree14" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.750229, 18.9, -87.4973 )
+
+[node name="Tall_Low_Leaf_Tree15" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.3521, 18.9, -69.4934 )
+
+[node name="Tall_Low_Leaf_Tree16" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50.7689, 18.9, -69.4934 )
+
+[node name="Tall_Low_Leaf_Tree17" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 79.5028, 18.9, -93.5518 )
+
+[node name="Tall_Low_Leaf_Tree18" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 88.2855, 18.9, -29.6707 )
+
+[node name="Tall_Low_Leaf_Tree19" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53.3102, 18.9, -21.3694 )
+
+[node name="Tall_Low_Leaf_Tree20" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 80.8505, 18.9, -56.5856 )
+
+[node name="Tall_Low_Leaf_Tree21" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 80.5757, 18.9, -3.24924 )
+
+[node name="Tall_Low_Leaf_Tree22" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 57.9303, 18.9, 28.9512 )
+
+[node name="Tall_Low_Leaf_Tree23" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 57.9303, 18.9, 1.44464 )
+
+[node name="Tall_Low_Leaf_Tree24" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 83.348, 18.9, 36.4075 )
+
+[node name="Tall_Low_Leaf_Tree25" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 83.348, 18.9, 36.4075 )
+
+[node name="Tall_Low_Leaf_Tree10" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -79.4213, 18.4403, -19.4596 )
+
+[node name="Tall_Low_Leaf_Tree11" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -60.3893, 18.4403, -42.3017 )
+
+[node name="Tall_Low_Leaf_Tree12" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -70.5698, 18.4403, -3.85514 )
+
+[node name="Tall_Low_Leaf_Tree13" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -60.0662, 18.4403, -15.0981 )
+
+[node name="Tall_Low_Leaf_Tree3" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.9, -25.8599 )
+
+[node name="Tall_Low_Leaf_Tree4" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.2707, 18.8455, 20.0378 )
+
+[node name="Tall_Low_Leaf_Tree26" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4472, 18.9, 64.832 )
+
+[node name="Tall_Low_Leaf_Tree27" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 36.6143, 18.9, 77.4069 )
+
+[node name="Tall_Low_Leaf_Tree28" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 93.4238, 18.9, 64.4888 )
+
+[node name="Tall_Low_Leaf_Tree29" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -39.2597, 18.9, 91.1844 )
+
+[node name="Tall_Low_Leaf_Tree30" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.202591, 18.9, 74.0556 )
+
+[node name="Tall_Low_Leaf_Tree31" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -39.9414, 18.9, 61.9985 )
+
+[node name="Tall_Low_Leaf_Tree32" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 67.8241, 18.9, 92.6382 )
+
+[node name="Tall_Low_Leaf_Tree33" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -65.4459, 18.9, 92.6382 )
+
+[node name="Tall_Low_Leaf_Tree34" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -56.8357, 18.9, 42.5747 )
+
+[node name="Tall_Low_Leaf_Tree35" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -85.8895, 18.9, 54.3668 )
+
+[node name="Tall_Low_Leaf_Tree36" parent="Forest" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.812, 18.9, 80.5432 )
+
+[node name="Enemies" type="Spatial" parent="."]
+
+[node name="Enemy_Spawn_Timer" type="Timer" parent="Enemies"]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="Ghost" parent="Enemies" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0 )
+[connection signal="timeout" from="Game_Timer" to="." method="_on_Game_Timer_timeout"]
+[connection signal="timeout" from="Enemies/Enemy_Spawn_Timer" to="." method="_on_Enemy_Spawn_Timer_timeout"]

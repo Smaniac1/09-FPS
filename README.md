@@ -1,0 +1,2 @@
+# 09-FPS
+This is a first person shooter where you play as an unkown character trying to survive in a forest filled with ghost for ten minutes. Use the WASD keys to move and the space button to use your flash light and kill the ghost. Watch out though, using your flashlight for to long will cause it to be disabled for five seconds. Can you survive the ever increasing number of ghost and get away?
