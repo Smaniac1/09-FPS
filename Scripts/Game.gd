@@ -32,6 +32,7 @@ func _physics_process(delta):
 	$HUD/Enemy_Health.text = "Enemy Health: " + str(enemy_health)
 	$HUD/Flash_Light_Time.text = "Time Left on Flashlight: " + str(flashlight_time_left)
 	$HUD/Score.text = "Score: " + str(score)
+
 func _on_Enemy_Spawn_Timer_timeout():
 	var ghost = ghost_scene.instance()
 	randomize()
@@ -115,6 +116,7 @@ func _on_Enemy_Spawn_Timer_timeout():
 		spawn_increase -= 60
 		enemy_timer_length -= 1
 		score += 100
+	ghost.name = "Ghost" + str(x)
 	$Enemies.add_child(ghost)
 	$Enemies/Enemy_Spawn_Timer.set_wait_time(enemy_timer_length)
 	$Enemies/Enemy_Spawn_Timer.set_one_shot(true)

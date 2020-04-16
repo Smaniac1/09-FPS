@@ -60,7 +60,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
 current = true
 
 [node name="Flash_Light" parent="Player/Pivot" instance=ExtResource( 1 )]
-transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.3, -0.25, -0.25 )
+transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0.512816 )
 
 [node name="HUD" type="Node2D" parent="."]
 position = Vector2( 0, -1.10956 )
@@ -704,7 +704,7 @@ wait_time = 10.0
 one_shot = true
 autostart = true
 
-[node name="Ghost" parent="Enemies" instance=ExtResource( 10 )]
+[node name="Ghost1" parent="Enemies" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0 )
 [connection signal="timeout" from="Game_Timer" to="." method="_on_Game_Timer_timeout"]
 [connection signal="timeout" from="Enemies/Enemy_Spawn_Timer" to="." method="_on_Enemy_Spawn_Timer_timeout"]

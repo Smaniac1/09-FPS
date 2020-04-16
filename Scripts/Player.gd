@@ -17,6 +17,7 @@ var velocity = Vector3()
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	flashlight.turn_off()
 
 func take_damage(d):
 	health -= d
@@ -33,22 +34,10 @@ func get_input():
 		input_dir += -Camera.global_transform.basis.x
 	if Input.is_action_pressed("right"):
 		input_dir += Camera.global_transform.basis.x
-	if Input.is_action_just_pressed("light") and spotlight.show() == true:
-		spotlight.hide()
-		flashlight.time_left_light_timer = light_timer.get_time_left()
-		light_timer.stop()
-		flashlight_hit_box.set_disabled(true)
-		light_recharge.set_wait_time(.01)
-		light_recharge.set_one_Shot(true)
-		light_recharge.start()
-	if flashlight.light_disabled == false:
-		if Input.is_action_just_released("light") and spotlight.hide() == true:
-			flashlight_hit_box.set_disabled(false)
-			spotlight.show()
-			light_timer.set_wait_time(flashlight.time_left_light_timer)
-			light_timer.set_one_shot(true)
-			light_timer.start()
-			light_recharge.stop()
+	if Input.is_action_just_pressed("light"):
+		flashlight.turn_on()
+	if Input.is_action_just_released("light"):
+		flashlight.turn_off()
 	input_dir = input_dir.normalized()
 	return input_dir
 
