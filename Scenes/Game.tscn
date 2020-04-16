@@ -60,7 +60,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
 current = true
 
 [node name="Flash_Light" parent="Player/Pivot" instance=ExtResource( 1 )]
-transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0.512816 )
+transform = Transform( 0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.4, -0.3, -0.3 )
 
 [node name="HUD" type="Node2D" parent="."]
 position = Vector2( 0, -1.10956 )

@@ -3,6 +3,7 @@ extends Spatial
 var enemy_timer_length = 10
 var spawn_increase = 540
 var ghost_scene = load("res://Scenes/Ghost.tscn")
+var i = 0
 
 onready var enemy_health = $Player/Pivot/Flash_Light.enemy_health
 onready var flashlight_time_left = $Player/Pivot/Flash_Light.time_left_light_timer
@@ -112,11 +113,13 @@ func _on_Enemy_Spawn_Timer_timeout():
 	if x == 25:
 		ghost.translation.x = -100
 		ghost.translation.z = -100
-	if time_left < spawn_increase:
+	if time_left <= spawn_increase:
+		print("Speed UP")
+		$Player/Pivot/Flash_Light.a_minute_has_passed()
 		spawn_increase -= 60
 		enemy_timer_length -= 1
-		score += 100
-	ghost.name = "Ghost" + str(x)
+	i += 1
+	ghost.name = "Ghost" + str(i)
 	$Enemies.add_child(ghost)
 	$Enemies/Enemy_Spawn_Timer.set_wait_time(enemy_timer_length)
 	$Enemies/Enemy_Spawn_Timer.set_one_shot(true)

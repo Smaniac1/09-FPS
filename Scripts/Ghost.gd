@@ -1,7 +1,7 @@
 extends KinematicBody
 
 var state = ""
-var speed = 5
+var speed = 6
 onready var Scan = $Area
 var health = 100
 var found = false
@@ -33,7 +33,6 @@ func _physics_process(delta):
 	if found == false:
 		change_state("searching")
 	if found == true:
-		look_at(-player.translation, Vector3(0,1,0))
 		change_state("found")
 	if state == "searching":
 		if x == 1:
@@ -65,13 +64,11 @@ func _physics_process(delta):
 		if (translation.z > 100) or (translation.z < -100):
 			velocity.z *= -1
 		velocity = move_and_slide(velocity, Vector3.UP, true)
-	if found == true:
-		look_at(-player.translation, Vector3(0,1,0))
-		change_state("found")
 	if state == "found":
+		look_at(-player.translation, Vector3(0,1,0))
 		player_position = player.translation
 		velocity = (player_position - translation).normalized()
-		velocity = move_and_collide(velocity * speed * delta)
+		velocity = move_and_slide(velocity * speed, Vector3.UP, true)
 
 func _on_Area_body_entered(body):
 	if body.name == 'Player':
@@ -85,7 +82,7 @@ func _on_Area_body_exited(body):
 func _on_Walk_Timer_timeout():
 	randomize()
 	x = randi()%8+1
-	$Walk_Timer.set_wait_time(2)
+	$Walk_Timer.set_wait_time(5)
 	$Walk_Timer.set_one_shot(true)
 	$Walk_Timer.start()
 

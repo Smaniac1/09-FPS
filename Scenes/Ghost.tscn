@@ -137,7 +137,7 @@ transform = Transform( 15, 0, 0, 0, 2, 0, 0, 0, 15, 0, 0, 0 )
 shape = SubResource( 7 )
 
 [node name="Walk_Timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 5.0
 one_shot = true
 
 [node name="Damage_Timer" type="Timer" parent="."]

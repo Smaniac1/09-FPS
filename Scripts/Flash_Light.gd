@@ -14,6 +14,9 @@ func _physics_process(delta):
 	if not $Light_Timer.is_stopped():
 		time_left_light_timer = $Light_Timer.get_time_left()
 
+func a_minute_has_passed():
+	score += 100
+
 
 func turn_on():
 	if not disabled and not on:
